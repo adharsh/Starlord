@@ -8,9 +8,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import simulation.Globals;
-import simulation.MainThread;
 import maths.Particle;
+import maths.Ti84;
+import simulation.Globals;
+import simulation.Launcher;
 
 public class DataVisualization extends JPanel implements ActionListener {
 	/**
@@ -34,32 +35,8 @@ public class DataVisualization extends JPanel implements ActionListener {
 		};
 
 		colLength = sColNames.length;
-
-		if(isGravity)
-		{
-			for(int i = 0; i < Globals.N; i++){
-
-				Globals.particles.add(	new Particle(
-						(float)( (Math.random()-0.5) * Globals.X_RANGE ), //x
-						(float)( (Math.random()-0.5) * Globals.Y_RANGE ), //y
-						(float)( Math.random() * Globals.Z_RANGE ),		  //z
-						1E10f, 0.0f, 0.0f, 0.0f));	//mass, Vx, Vy, Vz
-				//		(int)( Math.random() * 2)
-			}
-		}
-		else
-		{
-			for(int i = 0; i < Globals.N; i++){
-
-				Globals.particles.add(	new Particle(
-						(float)( (Math.random()-0.5) * Globals.X_RANGE ), //x
-						(float)( (Math.random()-0.5) * Globals.Y_RANGE ), //y
-						(float)( Math.random() * Globals.Z_RANGE ),		  //z
-						0.0001f, 0.0f, 0.0f, 0.0f));	//mass, Vx, Vy, Vz
-				//		(int)( Math.random() * 2)
-			}
-		}
 		
+		Ti84.intializeParticles(isGravity);
 		
 		Object[][] data = new Object[Globals.N][sColNames.length];
 
@@ -128,10 +105,8 @@ public class DataVisualization extends JPanel implements ActionListener {
 
 		if(c==1)
 		{
-			this.remove(enter);
-			MainThread mainThread = new MainThread();
-			Thread launcher = new Thread(mainThread);
-			launcher.start();
+			remove(enter);
+			Launcher.launch();
 		}
 
 	}

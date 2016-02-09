@@ -6,46 +6,6 @@ import simulation.Globals;
 public class Ti84 implements Runnable{
 
 	public Ti84(){
-		
-	//	Globals.particles.get(0).mass = 10E12f;
-	//	Globals.particles.get(0).x = -1f;
-	//	Globals.particles.get(0).y = 0f;
-/*		
-		Globals.particles.get(1).mass = -10E12f;
-		Globals.particles.get(1).x = 1f;
-		Globals.particles.get(1).y = 0f;
-		
-		Globals.particles.get(2).mass = -10E12f;
-		Globals.particles.get(2).x = 0f;
-		Globals.particles.get(2).y = 1f;
-		
-		Globals.particles.get(3).mass = -10E12f;
-		Globals.particles.get(3).x = 0f;
-		Globals.particles.get(3).y = -1f;
-		
-		Globals.particles.get(4).mass = -10E14f;
-		Globals.particles.get(4).x = -100f;
-		Globals.particles.get(4).y = 0f;
-		
-		Globals.particles.get(5).mass = -10E14f;
-		Globals.particles.get(5).x = 100f;
-		Globals.particles.get(5).y = 0f;
-		
-		Globals.particles.get(6).mass = 10E14f;
-		Globals.particles.get(6).x = 0f;
-		Globals.particles.get(6).y = 0f;
-		
-	//	Globals.particles.get(1).mass = -10E11f;
-	//	Globals.particles.get(1).x = 1f;
-	//	Globals.particles.get(1).y = 0f;
-		
-		
-	//	Globals.particles.get(1).mass = 10E12f;
-	//	Globals.particles.get(2).mass = 10E12f;
-	//	Globals.particles.get(3).mass = 10E12f;
-	//	Globals.particles.get(4).mass = 10E13f;
-	*/	
-	//	System.out.println(Globals.particles.get(0));
 		almightyForce();
 	}
 
@@ -66,6 +26,33 @@ public class Ti84 implements Runnable{
 		}	
 	}
 	
+	public static void intializeParticles(boolean isGravity)
+	{
+		if(isGravity)
+		{
+			for(int i = 0; i < Globals.N; i++){
+
+				Globals.particles.add(	new Particle(
+						(float)( (Math.random()-0.5) * Globals.X_RANGE ), //x
+						(float)( (Math.random()-0.5) * Globals.Y_RANGE ), //y
+						(float)( Math.random() * Globals.Z_RANGE ),		  //z
+						1E10f, 0.0f, 0.0f, 0.0f));	//mass, Vx, Vy, Vz
+				//		(int)( Math.random() * 2)
+			}
+		}
+		else
+		{
+			for(int i = 0; i < Globals.N; i++){
+
+				Globals.particles.add(	new Particle(
+						(float)( (Math.random()-0.5) * Globals.X_RANGE ), //x
+						(float)( (Math.random()-0.5) * Globals.Y_RANGE ), //y
+						(float)( Math.random() * Globals.Z_RANGE ),		  //z
+						0.0001f, 0.0f, 0.0f, 0.0f));	//mass, Vx, Vy, Vz
+				//		(int)( Math.random() * 2)
+			}
+		}
+	}
 	
 	@Override
 	public void run() {

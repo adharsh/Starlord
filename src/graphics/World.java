@@ -19,7 +19,7 @@ public class World implements Runnable, KeyListener, MouseMotionListener, MouseW
 	private final Color alphaLayer;
 
 	private int[] keys;
-	private float xTranslate, 
+	private float xTranslate,
 	zTranslate = (Globals.X_RANGE/Globals.Z_RANGE > Globals.Y_RANGE/Globals.Z_RANGE)? Globals.X_RANGE/Globals.Z_RANGE : Globals.Y_RANGE/Globals.Z_RANGE;
 
 	float yawY = 0.0f;
@@ -27,7 +27,7 @@ public class World implements Runnable, KeyListener, MouseMotionListener, MouseW
 	float rollZ = 0.0f;
 
 	public World(BufferedImage target){
-
+		
 		this.target = target;
 		bufferGraphics = target.createGraphics();
 
@@ -40,6 +40,12 @@ public class World implements Runnable, KeyListener, MouseMotionListener, MouseW
 
 		keys = new int[100];
 		//	addKeyListener(this);
+	
+		if(!Globals.isTable)
+		{
+			zTranslate = Globals.ZOOM_FACTOR + Math.max(Math.max(Globals.X_RANGE, Globals.Y_RANGE), Globals.Z_RANGE);
+		}
+	
 	}
 
 	@Override

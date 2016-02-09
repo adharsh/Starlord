@@ -1,6 +1,4 @@
 package simulation;
-import graphics.DataVisualization;
-
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -15,60 +13,63 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import graphics.AlphaValue;
+import graphics.DataVisualization;
+
+/*
+ * Make Cool Configurations to Show 
+	1. Three Body Problem 
+	2. Plane of particles
+	3. Cube
+	4. Cube to sphere
+	5. Discus 
+	6. Big bang -> 1E4F for zTranslate
+		N: 1000
+		X: 1
+		Y: 1
+		Z: 1
+
+ * ******************************************************************************************************************************************
+ *	1. Adjust frame rate -> Change MainTHreadsleep, others like world should be fast and Ti84 should also be fast
+	3. Input during Simulation -> Check : )
+ * 	4. Catch reading JTable errors -> Check : )
+ * 	5. JTable rendering behind image, just comment out Display::paintComponent->//g.drawImage( target, 0, 0, null ); 
+ * 	5. Varying speeds, adjust thread sleep to same number
+ * ******************************************************************************************************************************************
+ */
+
 public class Launcher extends JPanel implements ActionListener{
-	
-	/*
-	 * Make Cool Configurations to Show 
-		1. Three Body Problem 
-		2. Plane of particles
-		3. Cube
-		4. Cube to sphere
-		5. Discus 
-		6. Big bang -> 1E4F for zTranslate
-			N: 1000
-			X: 1
-			Y: 1
-			Z: 1
-		
-	 * ******************************************************************************************************************************************
-	 *	1. Adjust frame rate -> Change MainTHreadsleep, others like world should be fast and Ti84 should also be fast
-		3. Input during Simulation -> Check : )
-	 * 	4. Catch reading JTable errors -> Check : )
-	 * 	5. JTable rendering behind image, just comment out Display::paintComponent->//g.drawImage( target, 0, 0, null ); 
-	 * 	5. Varying speeds, adjust thread sleep to same number
-	 * ******************************************************************************************************************************************
-	 */
-	
-	
-	
+
 	int c = 0;
 	private static Launcher input;
-	JTextField N = new JTextField();
-	JTextField xRange = new JTextField();
-	JTextField yRange = new JTextField();
-	JTextField zRange = new JTextField();
-	JButton initiate = new JButton("Initiate");
-	JLabel[] text = new JLabel[4];
-	JCheckBox isGravity = new JCheckBox("Gravity", true);
-	
+	private JTextField N = new JTextField();
+	private JTextField xRange = new JTextField();
+	private JTextField yRange = new JTextField();
+	private JTextField zRange = new JTextField();
+	private JTextField zoom = new JTextField();
+	private JButton initiate = new JButton("Initiate");
+	private JCheckBox isGravity = new JCheckBox("Gravity", true);
+	private JCheckBox isTable = new JCheckBox("Table", true);
+
 	public Launcher(){
 		setLayout(new GridLayout(0,2,10,10));
 		setBorder(BorderFactory.createEmptyBorder(10,50,10,50));
 		
-		text[0] = new JLabel("Number of Particles: ");
-		text[1] = new JLabel("X Range: ");
-		text[2] = new JLabel("Y Range: ");
-		text[3] = new JLabel("Z Range: ");
+		zoom.setText("0");
 		
-		add(text[0]);
+		add(new JLabel("Number of Particles: "));
 		add(N);
-		add(text[1]);
+		add(new JLabel("X Range: "));
 		add(xRange);
-		add(text[2]);
+		add( new JLabel("Y Range: "));
 		add(yRange);
-		add(text[3]);
+		add(new JLabel("Z Range: "));
 		add(zRange);
+		add(new JLabel("Zoom Out Translation: "));
+		add(zoom);
 		add(isGravity);
+		add(isTable);
+		add(new JLabel(""));
 		
 		initiate.setActionCommand("Initiate");
 		initiate.addActionListener(this);
@@ -78,54 +79,75 @@ public class Launcher extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		try{
 			c++;
-			if(	(c == 1) && e.getActionCommand().equals("Initiate"))
+			if((c == 1) && e.getActionCommand().equals("Initiate"))
 			{
 				Globals.N = Integer.parseInt(N.getText());
 				Globals.X_RANGE = Float.parseFloat(xRange.getText());
 				Globals.Y_RANGE = Float.parseFloat(yRange.getText());
 				Globals.Z_RANGE = Float.parseFloat(zRange.getText());
+				Globals.ZOOM_FACTOR = Float.parseFloat(zoom.getText());
 			}
-			
+
 		}catch(Exception e1){
 			//e1.printStackTrace();
 			c--;
 		}
-			
+
 		if(c==1)
 		{
-			DataVisualization inner = new DataVisualization(isGravity.isSelected());
-			inner.setOpaque(true); //content panes must be opaque
+			Globals.isTable = isTable.isSelected();
 			
-			JPanel container = new JPanel();
-			container.add(inner);
+			if(!isTable.isSelected())
+			{
+				Globals.frame.remove(input);
+				
+				AlphaValue alpha = new AlphaValue(isGravity.isSelected());
+				Globals.frame.add(alpha);
+				Globals.frame.setContentPane(alpha);
+				
+				Globals.frame.setLocationRelativeTo(null);
+				Globals.frame.pack();
+				Globals.frame.setVisible(true);
+			}else{
+				
+				Globals.frame.remove(input);
+				
+				DataVisualization inner = new DataVisualization(isGravity.isSelected());
+				
+				Globals.frame.add(inner);
+				Globals.frame.setContentPane(inner);
+				
+				Globals.frame.pack();
+				Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+				Globals.frame.setLocation( (int) (dim.width/2.0 - 760.0), (int) (dim.height/2.0 - 883.0/2) );
+				
+				Globals.frame.setVisible(true);
+			}
 			
-			Globals.frame.remove(input);
 			
-			Globals.frame.add(container);
-			Globals.frame.setContentPane(container);
-			
-			Globals.frame.pack();
-			Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-			Globals.frame.setLocation( (int) (dim.width/2.0 - 760.0), (int) (dim.height/2.0 - 883.0/2) );
-			
-			Globals.frame.setVisible(true);
 		}
-		
 	}
 	
+	
+	public static void launch()
+	{
+		MainThread mainThread = new MainThread();
+		Thread launcher = new Thread(mainThread);
+		launcher.start();
+	}
 	
 	public static void main(String[] args){
 		Globals.frame = new JFrame("StarLord");
 		Globals.frame.setResizable(false);
 		Globals.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Globals.frame.setAlwaysOnTop(true);
+	//	Globals.frame.setAlwaysOnTop(true);
 		input = new Launcher();
 		Globals.frame.add(input);
 		Globals.frame.setContentPane(input);
-		
+
 		Globals.frame.pack();
 		Globals.frame.setVisible(true);
 		Globals.frame.setLocationRelativeTo(null);

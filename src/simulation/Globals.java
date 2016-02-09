@@ -34,4 +34,8 @@ public class Globals {
 	public static JTable table;
 	public static JFrame frame;
 	
+	public static boolean isTable;
+	
+	public static float ZOOM_FACTOR = 1;
+	
 }
