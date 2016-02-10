@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 import graphics.AlphaValue;
 import graphics.DataVisualization;
 
-/*
+/* ZoomGravityStarLordname - Bagley
  * Make Cool Configurations to Show 
 	1. Three Body Problem 
 	2. Plane of particles

@@ -57,6 +57,7 @@ public class MainThread implements Runnable{
 			Globals.frame.addMouseMotionListener(drawingToImage);
 			Globals.frame.addMouseWheelListener(drawingToImage);
 		}else{
+			Globals.frame.requestFocus();
 			Globals.frame.setContentPane(display);
 			Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 			Globals.frame.setLocation( (int) (dim.width/2.0 - 760.0/2.0), (int) (dim.height/2.0 - 883.0/2) );

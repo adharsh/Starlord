@@ -37,12 +37,19 @@ public class Screenshot implements KeyListener{
 			e.printStackTrace();
 		}
 		
-		Rectangle areaOfDrawing = new Rectangle( corner.x, corner.y, 200, 200);
-		BufferedImage dataImage = screenShot.createScreenCapture(areaOfDrawing);
+		BufferedImage picture = null;
+		Rectangle areaOfDrawing = null;
+		
+		if(!Globals.isTable)
+			areaOfDrawing = new Rectangle( corner.x + 3, corner.y + 26, Globals.DIMENSION_W, Globals.DIMENSION_H);
+		else
+			areaOfDrawing = new Rectangle( corner.x + Globals.DIMENSION_W - 66, corner.y + 41, Globals.DIMENSION_W, Globals.DIMENSION_H);
+
+		picture = screenShot.createScreenCapture(areaOfDrawing);
 		
 		try {
 		    File outputfile = new File("StarLord" + Integer.toString(c) + ".png");
-		    ImageIO.write(dataImage, "png", outputfile);
+		    ImageIO.write(picture, "png", outputfile);
 		} catch (IOException e) {
 			System.out.println("Picture");
 			e.printStackTrace();
