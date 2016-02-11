@@ -56,16 +56,11 @@ public class MainThread implements Runnable{
 			Globals.frame.addKeyListener(drawingToImage);
 			Globals.frame.addMouseMotionListener(drawingToImage);
 			Globals.frame.addMouseWheelListener(drawingToImage);
-<<<<<<< HEAD
-			
-=======
->>>>>>> b8070bf2a8d0137cc0fd2a4a4d2f5922866dacb3
 		}else{
 			Globals.frame.requestFocus();
 			Globals.frame.setContentPane(display);
 			Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 			Globals.frame.setLocation( (int) (dim.width/2.0 - 760.0/2.0), (int) (dim.height/2.0 - 883.0/2) );
-<<<<<<< HEAD
 		
 			if(Globals.alphaLayerValue >= 63)
 			{
@@ -74,8 +69,6 @@ public class MainThread implements Runnable{
 				Globals.frame.addMouseWheelListener(drawingToImage);
 			}
 				
-=======
->>>>>>> b8070bf2a8d0137cc0fd2a4a4d2f5922866dacb3
 		}	
 		
 		Globals.frame.pack();
@@ -94,11 +87,8 @@ public class MainThread implements Runnable{
 
 			try { Thread.sleep(10); } catch (InterruptedException e) { e.printStackTrace(); }
 
-<<<<<<< HEAD
 			Globals.dt = (float)(System.nanoTime() - fps)/(4E7f); //+ 9E6f);
-=======
 			Globals.dt = (float)(System.nanoTime() - fps)/1E8f;
->>>>>>> b8070bf2a8d0137cc0fd2a4a4d2f5922866dacb3
 			fps = System.nanoTime();
 			//	System.out.println("Globals dt:" + Globals.dt);
 			//	System.out.println("2: " + System.nanoTime());

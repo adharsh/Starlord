@@ -43,21 +43,14 @@ public class Screenshot implements KeyListener{
 		if(!Globals.isTable)
 			areaOfDrawing = new Rectangle( corner.x + 3, corner.y + 26, Globals.DIMENSION_W, Globals.DIMENSION_H);
 		else
-<<<<<<< HEAD
 			//areaOfDrawing = new Rectangle( corner.x + Globals.DIMENSION_W - 66, corner.y + 41, Globals.DIMENSION_W, Globals.DIMENSION_H);
 			areaOfDrawing = new Rectangle( corner.x + 3, corner.y + 26, Globals.DIMENSION_W * 2 - 80, Globals.DIMENSION_H);
-=======
 			areaOfDrawing = new Rectangle( corner.x + Globals.DIMENSION_W - 66, corner.y + 41, Globals.DIMENSION_W, Globals.DIMENSION_H);
->>>>>>> b8070bf2a8d0137cc0fd2a4a4d2f5922866dacb3
 
 		picture = screenShot.createScreenCapture(areaOfDrawing);
 		
 		try {
-<<<<<<< HEAD
 		    File outputfile = new File("StarLord" + Integer.toString(c) + ".jpg");
-=======
-		    File outputfile = new File("StarLord" + Integer.toString(c) + ".png");
->>>>>>> b8070bf2a8d0137cc0fd2a4a4d2f5922866dacb3
 		    ImageIO.write(picture, "png", outputfile);
 		} catch (IOException e) {
 			System.out.println("Picture");

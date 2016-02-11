@@ -39,17 +39,14 @@ public class World implements Runnable, KeyListener, MouseMotionListener, MouseW
 		bufferGraphics.fillRect(0, 0, Globals.DIMENSION_W, Globals.DIMENSION_H);
 
 		keys = new int[100];
-<<<<<<< HEAD
 	
 		zTranslate = Globals.ZOOM_FACTOR + Math.max(Math.max(Globals.X_RANGE, Globals.Y_RANGE), Globals.Z_RANGE);
-=======
 		//	addKeyListener(this);
 	
 		if(!Globals.isTable)
 		{
 			zTranslate = Globals.ZOOM_FACTOR + Math.max(Math.max(Globals.X_RANGE, Globals.Y_RANGE), Globals.Z_RANGE);
 		}
->>>>>>> b8070bf2a8d0137cc0fd2a4a4d2f5922866dacb3
 	
 	}
 

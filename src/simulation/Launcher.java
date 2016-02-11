@@ -1,13 +1,10 @@
 package simulation;
-<<<<<<< HEAD
 import graphics.AlphaValue;
 import graphics.DataVisualization;
 
 import java.awt.Dimension;
 import java.awt.Font;
-=======
 import java.awt.Dimension;
->>>>>>> b8070bf2a8d0137cc0fd2a4a4d2f5922866dacb3
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -20,13 +17,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-<<<<<<< HEAD
 import javax.swing.SwingConstants;
-=======
 
 import graphics.AlphaValue;
 import graphics.DataVisualization;
->>>>>>> b8070bf2a8d0137cc0fd2a4a4d2f5922866dacb3
 
 /* ZoomGravityStarLordname - Bagley
  * Make Cool Configurations to Show 
@@ -68,7 +62,6 @@ public class Launcher extends JPanel implements ActionListener{
 		setBorder(BorderFactory.createEmptyBorder(10,50,10,50));
 		
 		zoom.setText("0");
-<<<<<<< HEAD
 		JPanel rtfm = new JPanel();
 		JLabel manual = new JLabel("By Adharsh Babu, AOOD - Art Project");
 		
@@ -81,8 +74,6 @@ public class Launcher extends JPanel implements ActionListener{
 		Font italicFont = new Font(font.getFontName(), Font.ITALIC, font.getSize());
 		owner.setFont(italicFont);
 		add(owner);
-=======
->>>>>>> b8070bf2a8d0137cc0fd2a4a4d2f5922866dacb3
 		
 		add(new JLabel("Number of Particles: "));
 		add(N);
@@ -171,20 +162,15 @@ public class Launcher extends JPanel implements ActionListener{
 		Globals.frame.setResizable(false);
 		Globals.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	//	Globals.frame.setAlwaysOnTop(true);
-<<<<<<< HEAD
 		
 		input = new Launcher();
 		Globals.frame.add(input);
 		//Globals.frame.setContentPane(input);
 		
-		
-		
-=======
 		input = new Launcher();
 		Globals.frame.add(input);
 		Globals.frame.setContentPane(input);
 
->>>>>>> b8070bf2a8d0137cc0fd2a4a4d2f5922866dacb3
 		Globals.frame.pack();
 		Globals.frame.setVisible(true);
 		Globals.frame.setLocationRelativeTo(null);
